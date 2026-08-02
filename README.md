@@ -15,7 +15,7 @@ The code below demonstrates a minimal configuration for usage in
 `.pre-commit-config.yaml`.
 
 ```yaml
-- repo: https://github.com/Selene0623/pre-commit-hooks-idents
+- repo: https://github.com/Selene0623/pre-commit-hooks-indents
   rev: v0.0.2
   hooks:
       - id: indents-to-tabs
@@ -32,7 +32,7 @@ before replacing spaces with tabs in the indents of Terraform files, and
 will replace tab indents with spaces in YAML files.
 
 ```yaml
-- repo: https://github.com/Selene0623/pre-commit-hooks-idents
+- repo: https://github.com/Selene0623/pre-commit-hooks-indents
   rev: v0.0.2
   hooks:
       - id: indents-to-tabs
