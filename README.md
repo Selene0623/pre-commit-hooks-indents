@@ -1,4 +1,4 @@
-# Pre-Commit Hook: Convert indents (from spaces) to tabs
+# Pre-Commit Hook: Convert indents between tabs and spaces
 
 ## Usage
 
@@ -6,46 +6,51 @@ This project is intended to be used via
 [pre-commit](https://pre-commit.com) and the `.pre-commit-config.yaml`
 file.
 
+It ships two hooks:
+
+- `indents-to-tabs` — replaces space indents with tabs
+- `indents-to-spaces` — replaces tab indents with spaces
+
 The code below demonstrates a minimal configuration for usage in
 `.pre-commit-config.yaml`.
 
 ```yaml
-- repo: https://github.com/jambonrose/pre-commit-indents-to-tabs
-  rev: v0.0.1
+- repo: https://github.com/Selene0623/pre-commit-hooks-idents
+  rev: v0.0.2
   hooks:
       - id: indents-to-tabs
 ```
 
+Both hooks accept the same flags:
+
+- `--spaces=INTEGER` — the indent width to convert. Default is `4`.
+- `--fmt=COMMAND,ARGS` — run a comma-delimited external command (e.g.
+  `terraform fmt -write`) before converting indents.
+
 The configuration below will run the `terraform fmt -write` command
-before replacing spaces with tabs in the indents of Terraform files. The
-configuration below also demonstrats the use of the `--spaces` flag,
-although it is technically redundant as `2` is the default.
+before replacing spaces with tabs in the indents of Terraform files, and
+will replace tab indents with spaces in YAML files.
 
 ```yaml
-- repo: https://github.com/jambonrose/pre-commit-indents-to-tabs
-  rev: v0.0.1
+- repo: https://github.com/Selene0623/pre-commit-hooks-idents
+  rev: v0.0.2
   hooks:
       - id: indents-to-tabs
-        args: ["--fmt=terraform,fmt,-write", "--spaces=2"]
+        args: ["--fmt=terraform,fmt,-write", "--spaces=4"]
         types: ["terraform"]
+      - id: indents-to-spaces
+        args: ["--fmt=yamlfmt,-d,-yaml.stdout", "--spaces=4"]
+        types: ["yaml"]
 ```
 
 ## Project Rationale
 
-I created this project as a reaction to the Terraform autoformatter.
-However, the project can be used in other circumstances.
-
-Autoformatters are great. However, Terraform's `fmt` command indents
-code using two-spaces. I have a mild visual impairment, and a two-space
-indent is difficult for me.
-
-I want to benefit from all of the other work the autoformatter is doing
-for me, and I simply want to replace the space indents with tabs. I
-don't want to create my own autoformatter. This pre-commit hook is meant
-to be run after the autoformatter to achieve these goals.
+This project is a fork of jambonrose's
+[pre-commit-indents-to-tabs](https://github.com/jambonrose/pre-commit-indents-to-tabs),
+extended to replace *either* direction of indentation, so teams that
+prefer spaces and teams that prefer tabs can both use it from a single
+repo.
 
 Philosophically speaking: Tabs are for indents. Spaces are for
 alignment. Tabs allow people to set their own preference, a necessity
 for those with different needs.
-
-I hope this helps others with eye issues.

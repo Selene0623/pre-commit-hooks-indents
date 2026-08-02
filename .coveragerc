@@ -2,10 +2,12 @@
 source =
     src/indents_to_tabs
     */site-packages/indents_to_tabs
+    src/indents_to_spaces
+    */site-packages/indents_to_spaces
 
 [run]
 branch = true
-source = indents_to_tabs
+source = indents_to_tabs, indents_to_spaces
 
 [report]
 show_missing = true

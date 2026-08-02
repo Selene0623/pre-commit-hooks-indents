@@ -4,3 +4,9 @@
   entry: indents-to-tabs
   language: python
   types: [text]
+- id: indents-to-spaces
+  name: Indents to spaces
+  description: Replace tabs with spaces in indents
+  entry: indents-to-spaces
+  language: python
+  types: [text]
